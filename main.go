@@ -7,7 +7,8 @@ import (
 	"strings"
 )
 
-const excelFileName = "path/to/your/excel"
+const categoryFileName = "path/to/your/excelCategories"
+const excelFileName = "path/to/your/excelExpenses"
 
 func main() {
 	categories := setUpGroups()
@@ -16,7 +17,7 @@ func main() {
 	xlFile, err := xlsx.OpenFile(excelFileName)
 	if err != nil {
 	}
-	for _, row := range xlFile.Sheets[1].Rows {
+	for _, row := range xlFile.Sheets[0].Rows {
 		text := row.Cells[3].String()
 		amount := row.Cells[4].String()
 		found := false
@@ -44,7 +45,7 @@ func main() {
 }
 
 func setUpGroups() map[string][]string {
-	xlFile, err := xlsx.OpenFile(excelFileName)
+	xlFile, err := xlsx.OpenFile(categoryFileName)
 	if err != nil {
 	}
 
